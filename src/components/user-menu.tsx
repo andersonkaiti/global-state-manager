@@ -1,12 +1,12 @@
-import { LogOutIcon, UserIcon } from 'lucide-react';
+import { LogOutIcon, UserIcon } from 'lucide-react'
 
-import { useGlobal } from '../contexts/GlobalContext';
-import { useRenderCounter } from '../hooks/useRenderCounter';
+import { useGlobal } from '../contexts/global-context'
+import { useRenderCounter } from '../hooks/use-render-counter'
 
 export function UserMenu() {
-  useRenderCounter('UserMenu');
+  useRenderCounter('UserMenu')
 
-  const { user, login, logout } = useGlobal();
+  const { user, login, logout } = useGlobal()
 
   if (!user) {
     return (
@@ -17,7 +17,7 @@ export function UserMenu() {
       >
         Entrar
       </button>
-    );
+    )
   }
 
   return (
@@ -33,9 +33,9 @@ export function UserMenu() {
         </button>
       </div>
 
-      <div className="to-green flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-[#40cbf6] to-[#82c041]">
+      <div className="linear-to-r bg-from-[#40cbf6] flex h-10 w-10 items-center justify-center rounded-full to-[#82c041]">
         <UserIcon />
       </div>
     </div>
-  );
+  )
 }

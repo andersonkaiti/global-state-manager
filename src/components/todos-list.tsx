@@ -4,18 +4,18 @@ import {
   LeafIcon,
   Trash2Icon,
   WindIcon,
-} from 'lucide-react';
+} from 'lucide-react'
 
-import { useGlobal } from '../contexts/GlobalContext';
-import { useRenderCounter } from '../hooks/useRenderCounter';
-import { cn } from '../utils/cn';
+import { useGlobal } from '../contexts/global-context'
+import { useRenderCounter } from '../hooks/use-render-counter'
+import { cn } from '../utils/cn'
 
-import { TodoForm } from './TodoForm';
+import { TodoForm } from './todo-form'
 
 export function TodosList() {
-  useRenderCounter('TodosList');
+  useRenderCounter('TodosList')
 
-  const { todos, toggleTodoDone, removeTodo } = useGlobal();
+  const { todos, toggleTodoDone, removeTodo } = useGlobal()
 
   return (
     <div className="container mx-auto my-10 rounded-lg border border-white/5 p-6">
@@ -48,7 +48,7 @@ export function TodosList() {
                 <span
                   className={cn(
                     'flex items-center gap-2 text-lg transition-colors',
-                    todo.done && 'italic text-gray-500 line-through',
+                    todo.done && 'text-gray-500 italic line-through',
                   )}
                 >
                   {todo.title}
@@ -77,5 +77,5 @@ export function TodosList() {
         </ul>
       )}
     </div>
-  );
+  )
 }

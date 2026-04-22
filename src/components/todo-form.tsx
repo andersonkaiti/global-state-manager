@@ -1,27 +1,27 @@
-import { useRef } from 'react';
+import { useRef } from 'react'
 
-import { useGlobal } from '../contexts/GlobalContext';
-import { useRenderCounter } from '../hooks/useRenderCounter';
+import { useGlobal } from '../contexts/global-context'
+import { useRenderCounter } from '../hooks/use-render-counter'
 
 export function TodoForm() {
-  useRenderCounter('TodoForm');
+  useRenderCounter('TodoForm')
 
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const { addTodo } = useGlobal();
+  const inputRef = useRef<HTMLInputElement | null>(null)
+  const { addTodo } = useGlobal()
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+    event.preventDefault()
 
     if (inputRef.current?.value) {
-      addTodo(inputRef.current.value);
-      inputRef.current.value = '';
+      addTodo(inputRef.current.value)
+      inputRef.current.value = ''
     }
   }
 
   return (
     <form className="flex gap-4" onSubmit={handleSubmit}>
       <input
-        className="h-12 w-full rounded-lg bg-white/5 px-4 outline-none transition-all focus:ring-1 focus:ring-white"
+        className="h-12 w-full rounded-lg bg-white/5 px-4 transition-all outline-none focus:ring-1 focus:ring-white"
         placeholder="Título da tarefa..."
         ref={inputRef}
       />
@@ -33,5 +33,5 @@ export function TodoForm() {
         Enviar
       </button>
     </form>
-  );
+  )
 }
