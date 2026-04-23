@@ -1,7 +1,9 @@
 type SetterFn<T> = (prevState: T) => Partial<T>
 
-export function createStore<T>(initialState: T) {
-  let state = initialState
+type SetStateFn<T> = (partialState: Partial<T> | SetterFn<T>) => void
+
+export function createStore<T>(createState: (setState: SetStateFn<T>) => T) {
+  let state = createState(setState)
   const listeners = new Set<() => void>()
 
   function setState(partialState: Partial<T> | SetterFn<T>) {

@@ -5,14 +5,22 @@ import { createStore } from './create-store'
 interface IGlobalStore {
   user: IUser | null
   todos: ITodo[]
-  //   login(): void
-  //   logout(): void
+  login(): void
+  logout(): void
   //   addTodo(title: string, author?: string): void
   //   toggleTodoDone(todoId: number): void
   //   removeTodo(todoId: number): void
 }
 
-export const globalStore = createStore<IGlobalStore>({
+export const globalStore = createStore<IGlobalStore>((setState) => ({
   user: null,
   todos: [],
-})
+  login: () =>
+    setState({
+      user: {
+        email: 'anderkaiti@gmail.com',
+        name: 'Anderson Kaiti',
+      },
+    }),
+  logout: () => setState({ user: null }),
+}))
