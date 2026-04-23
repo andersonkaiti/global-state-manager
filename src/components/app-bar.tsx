@@ -1,6 +1,5 @@
 import logo from '../assets/images/logo.svg'
 import { useRenderCounter } from '../hooks/use-render-counter'
-
 import { TodosCounter } from './todos-counter'
 import { UserMenu } from './user-menu'
 

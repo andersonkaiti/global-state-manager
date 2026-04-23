@@ -1,9 +1,10 @@
 import js from '@eslint/js'
 import eslintConfigPrettier from 'eslint-config-prettier'
-import importPlugin from 'eslint-plugin-import'
+import importXPlugin from 'eslint-plugin-import-x'
 import prettierPlugin from 'eslint-plugin-prettier'
 import reactPlugin from 'eslint-plugin-react'
 import reactHooksPlugin from 'eslint-plugin-react-hooks'
+import simpleImportSortPlugin from 'eslint-plugin-simple-import-sort'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
@@ -19,7 +20,8 @@ export default tseslint.config(
       react: reactPlugin,
       'react-hooks': reactHooksPlugin,
       prettier: prettierPlugin,
-      import: importPlugin,
+      import: importXPlugin,
+      'simple-import-sort': simpleImportSortPlugin,
     },
     languageOptions: {
       parser: tseslint.parser,
@@ -51,29 +53,10 @@ export default tseslint.config(
       'no-empty': ['error', { allowEmptyCatch: true }],
       'react/jsx-no-bind': 'off',
       'import/prefer-default-export': 'off',
-      'import/extensions': [
-        'error',
-        'ignorePackages',
-        {
-          ts: 'never',
-          tsx: 'never',
-        },
-      ],
-      'import/order': [
-        'error',
-        {
-          groups: [
-            'builtin',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'index',
-          ],
-          alphabetize: { order: 'asc', caseInsensitive: true },
-          'newlines-between': 'always',
-        },
-      ],
+      'import/extensions': 'off',
+      'import/order': 'off',
+      'simple-import-sort/imports': 'error',
+      'simple-import-sort/exports': 'error',
       '@typescript-eslint/naming-convention': [
         'error',
         {

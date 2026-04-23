@@ -9,7 +9,6 @@ import {
 import { useGlobal } from '../contexts/global-context'
 import { useRenderCounter } from '../hooks/use-render-counter'
 import { cn } from '../utils/cn'
-
 import { TodoForm } from './todo-form'
 
 export function TodosList() {
