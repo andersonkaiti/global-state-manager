@@ -2,6 +2,7 @@ type SetterFn<T> = (prevState: T) => Partial<T>
 
 export function createStore<T>(initialState: T) {
   let state = initialState
+  const listeners = new Set<() => void>()
 
   function setState(partialState: Partial<T> | SetterFn<T>) {
     const newValue =
@@ -11,6 +12,20 @@ export function createStore<T>(initialState: T) {
       ...state,
       ...newValue,
     }
+
+    notifyListeners()
+  }
+
+  function subscribe(listener: () => void) {
+    listeners.add(listener)
+
+    return () => {
+      listeners.delete(listener)
+    }
+  }
+
+  function notifyListeners() {
+    listeners.forEach((listener) => listener())
   }
 
   function getState() {
@@ -20,25 +35,7 @@ export function createStore<T>(initialState: T) {
   return {
     setState,
     getState,
+    subscribe,
+    notifyListeners,
   }
 }
-
-const store = createStore({
-  userName: '',
-  isActive: false,
-  counter: 1,
-})
-
-console.log(store.getState())
-store.setState({ userName: 'Anderson Kaiti' })
-
-console.log(store.getState())
-store.setState((prevState) => ({ isActive: !prevState.isActive }))
-
-console.log(store.getState())
-store.setState((prevState) => ({ counter: prevState.counter + 1 }))
-
-console.log(store.getState())
-store.setState((prevState) => ({ counter: prevState.counter + 1 }))
-
-console.log(store.getState())
