@@ -41,22 +41,8 @@ export function createStore<TState>(
   function useStore<TValue>(
     selector: (currentState: TState) => TValue,
   ): TValue {
-    /**
-     * Sincroniza o componente com uma store externa (qualquer objeto)
-     * Parametros do useSyncExternalStore:
-     * 1. Subscribe: função que retorna uma função que cancela a inscrição
-     * 2. getSnapshot: função que retorna o estado atual
-     * 3. getServerSnapshot: função que retorna o estado atual no servidor (opcional)
-     */
-
     return useSyncExternalStore(subscribe, () => selector(state))
   }
 
-  return {
-    setState,
-    getState,
-    subscribe,
-    notifyListeners,
-    useStore,
-  }
+  return useStore
 }

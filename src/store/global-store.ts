@@ -20,44 +20,44 @@ interface IGlobalStore {
   removeTodo(todoId: number): void
 }
 
-const store = createStore<IGlobalStore>((setState, getState) => ({
-  user: null,
-  todos: [],
-  login: () =>
-    setState({
-      user: {
-        email: 'anderkaiti@gmail.com',
-        name: 'Anderson Kaiti',
-      },
-    }),
-  logout: () => setState({ user: null }),
-  addTodo: (title: string) => {
-    setState((prevState) => ({
-      todos: prevState.todos.concat({
-        id: Date.now(),
-        title,
-        author: getState().user?.name ?? 'Convidado',
-        done: false,
+export const useGlobalStore = createStore<IGlobalStore>(
+  (setState, getState) => ({
+    user: null,
+    todos: [],
+    login: () =>
+      setState({
+        user: {
+          email: 'anderkaiti@gmail.com',
+          name: 'Anderson Kaiti',
+        },
       }),
-    }))
-  },
-  toggleTodoDone: (todoId: number) => {
-    setState((prevState) => ({
-      todos: prevState.todos.map((todo) =>
-        todo.id === todoId
-          ? {
-              ...todo,
-              done: !todo.done,
-            }
-          : todo,
-      ),
-    }))
-  },
-  removeTodo: (todoId: number) => {
-    setState((prevState) => ({
-      todos: prevState.todos.filter((todo) => todo.id !== todoId),
-    }))
-  },
-}))
-
-export const useGlobalStore = store.useStore
+    logout: () => setState({ user: null }),
+    addTodo: (title: string) => {
+      setState((prevState) => ({
+        todos: prevState.todos.concat({
+          id: Date.now(),
+          title,
+          author: getState().user?.name ?? 'Convidado',
+          done: false,
+        }),
+      }))
+    },
+    toggleTodoDone: (todoId: number) => {
+      setState((prevState) => ({
+        todos: prevState.todos.map((todo) =>
+          todo.id === todoId
+            ? {
+                ...todo,
+                done: !todo.done,
+              }
+            : todo,
+        ),
+      }))
+    },
+    removeTodo: (todoId: number) => {
+      setState((prevState) => ({
+        todos: prevState.todos.filter((todo) => todo.id !== todoId),
+      }))
+    },
+  }),
+)

@@ -1,14 +1,14 @@
 import { LogOutIcon, UserIcon } from 'lucide-react'
 
 import { useRenderCounter } from '../hooks/use-render-counter'
-import { globalStore } from '../store/global-store'
+import { useGlobalStore } from '../store/global-store'
 
 export function UserMenu() {
   useRenderCounter('UserMenu')
 
-  const user = globalStore.useStore((state) => state.user)
-  const login = globalStore.useStore((state) => state.login)
-  const logout = globalStore.useStore((state) => state.logout)
+  const user = useGlobalStore((state) => state.user)
+  const login = useGlobalStore((state) => state.login)
+  const logout = useGlobalStore((state) => state.logout)
 
   if (!user) {
     return (
@@ -31,7 +31,7 @@ export function UserMenu() {
           className="flex items-center gap-1.5 text-sm text-red-500 transition-colors hover:text-red-400"
           onClick={logout}
         >
-          Sair <LogOutIcon className="h-4 w-4" />
+          Sair <LogOutIcon className="size-4" />
         </button>
       </div>
 

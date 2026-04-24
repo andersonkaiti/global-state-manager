@@ -1,13 +1,13 @@
-import { useRef } from 'react'
+import { memo, useRef } from 'react'
 
-import { useGlobal } from '../contexts/global-context'
 import { useRenderCounter } from '../hooks/use-render-counter'
+import { useGlobalStore } from '../store/global-store'
 
-export function TodoForm() {
+function TodoFormComponent() {
   useRenderCounter('TodoForm')
 
   const inputRef = useRef<HTMLInputElement | null>(null)
-  const { addTodo } = useGlobal()
+  const addTodo = useGlobalStore((state) => state.addTodo)
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -35,3 +35,5 @@ export function TodoForm() {
     </form>
   )
 }
+
+export const TodoForm = memo(TodoFormComponent)
