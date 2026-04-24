@@ -5,9 +5,9 @@ type SetterFn<T> = (prevState: T) => Partial<T>
 type SetStateFn<T> = (partialState: Partial<T> | SetterFn<T>) => void
 
 export function createStore<TState>(
-  createState: (setState: SetStateFn<TState>) => TState,
+  createState: (setState: SetStateFn<TState>, getState: () => TState) => TState,
 ) {
-  let state = createState(setState)
+  let state = createState(setState, getState)
   const listeners = new Set<() => void>()
 
   function setState(partialState: Partial<TState> | SetterFn<TState>) {
@@ -50,21 +50,6 @@ export function createStore<TState>(
      */
 
     return useSyncExternalStore(subscribe, () => selector(state))
-
-    // const [value, setValue] = useState(() => selector(state))
-
-    // useEffect(() => {
-    //   const unsubscribe = subscribe(() => {
-    //     const newValue = selector(state)
-
-    //     if (value !== newValue) {
-    //       setValue(newValue)
-    //     }
-    //   })
-    //   return () => unsubscribe()
-    // }, [selector, value])
-
-    // return value
   }
 
   return {
